@@ -1,0 +1,1 @@
+esha.deleteExpense("drinks",100)
