@@ -72,14 +72,14 @@ class Passbook{
 // console.log(piyush.spent)
 // console.log(piyush.entries)
 
-let esha = new Passbook();
-esha.addMoney("esha",1000)
-esha.addExpense("shopping",400);
-esha.deleteExpense("shopping",400)
-esha.addExpense("drinks",100);
-esha.addMoney("dad",1000)
+// let esha = new Passbook();
+// esha.addMoney("esha",1000)
+// esha.addExpense("shopping",400);
+// esha.deleteExpense("shopping",400)
+// esha.addExpense("drinks",100);
+// esha.addMoney("dad",1000)
 // esha.deleteExpense("shopping",400)
 // console.log(esha.moneyInAccount)
 // console.log(esha.spent)
-console.log(esha.entries)
+// console.log(esha.entries)
 
