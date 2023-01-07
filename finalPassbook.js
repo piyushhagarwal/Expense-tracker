@@ -1,10 +1,17 @@
+const File = require("./filehandling");
+
 class Passbook {
   previousMoney = 0;
   moneyInAccount = 0;
   spent = 0;
   entries = [];
 
-  addMoney(addedName, addedMoney) {
+  constructor(fileName) {
+    this.f = new File(fileName);
+    this.f.openFile();
+  }
+
+  addMoney(addedName, addedMoney, addedDate) {
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -15,18 +22,22 @@ class Passbook {
       this.previousMoney = this.moneyInAccount;
       this.moneyInAccount += addedMoney;
       let entry = {
+        id: this.entries.length + 1,
         name: addedName,
         AddedMoney: addedMoney,
         SpentMoney: 0,
-        date: currentDate,
+        date: addedDate,
         previousMoney: this.previousMoney,
         moneyInAccount: this.moneyInAccount,
       };
+      this.f.openFile();
+      this.f.appendInFile(`${JSON.stringify(entry)} \n`);
+
       this.entries.push(entry);
     }
   }
 
-  addExpense(expenseName, expenseMoney) {
+  addExpense(expenseName, expenseMoney, expenseDate) {
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -37,29 +48,24 @@ class Passbook {
       this.moneyInAccount -= expenseMoney;
       this.spent += expenseMoney;
       let expense = {
+        id: this.entries.length + 1,
         name: expenseName,
         AddedMoney: 0,
         SpentMoney: expenseMoney,
-        date: currentDate,
+        date: expenseDate,
         previousMoney: this.previousMoney,
         moneyInAccount: this.moneyInAccount,
       };
+      this.f.openFile();
+      this.f.appendInFile(`${JSON.stringify(expense)} \n`);
       this.entries.push(expense);
     }
   }
 
-  deleteExpense(expenseName, expenseMoney) {
+  deleteExpense(deleteId) {
     for (let i = 0; i < this.entries.length; i++) {
-      if (
-        this.entries[i].name === expenseName &&
-        (this.entries[i].SpentMoney === expenseMoney ||
-          this.entries[i].AddedMoney === expenseMoney)
-      ) {
-        if (this.entries[i].SpentMoney != 0) {
-          this.entries.splice(i, 1);
-        } else if (this.entries[i].AddedMoney != 0) {
-          this.entries.splice(i, 1);
-        }
+      if (this.entries[i].id === deleteId) {
+        this.entries.splice(i, 1);
       }
     }
     let newEntries = this.entries;
@@ -68,12 +74,14 @@ class Passbook {
     this.moneyInAccount = 0;
     this.spent = 0;
     this.entries = [];
+    this.f.deleteFile();
+    this.f.openFile();
 
     newEntries.forEach((entry) => {
       if (entry.SpentMoney === 0) {
-        this.addMoney(entry.name, entry.AddedMoney);
+        this.addMoney(entry.name, entry.AddedMoney, entry.date);
       } else if (entry.AddedMoney === 0) {
-        this.addExpense(entry.name, entry.SpentMoney);
+        this.addExpense(entry.name, entry.SpentMoney, entry.date);
       }
     });
   }
@@ -86,6 +94,13 @@ class Passbook {
   allEntries() {
     return this.entries;
   }
+
+  // destructor() {
+  //   fs.close(this.fileName, (err) => {
+  //     if (err) throw err;
+  //     console.log("File closed");
+  //   });
+  // }
 }
 
 module.exports = Passbook;
