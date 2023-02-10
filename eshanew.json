@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "esha",
+    "AddedMoney": 1000,
+    "SpentMoney": 0,
+    "date": "08-01-2023",
+    "previousMoney": 0,
+    "moneyInAccount": 1000
+  },
+  {
+    "id": 2,
+    "name": "drinks",
+    "AddedMoney": 0,
+    "SpentMoney": 100,
+    "date": "09-01-2023",
+    "previousMoney": 1000,
+    "moneyInAccount": 900
+  },
+  {
+    "id": 3,
+    "name": "pepsi",
+    "AddedMoney": 0,
+    "SpentMoney": 100,
+    "date": "11-01-2023",
+    "previousMoney": 900,
+    "moneyInAccount": 800
+  },
+  {
+    "id": 4,
+    "name": "dad",
+    "AddedMoney": 1000,
+    "SpentMoney": 0,
+    "date": "12-01-2023",
+    "previousMoney": 800,
+    "moneyInAccount": 1800
+  }
+]

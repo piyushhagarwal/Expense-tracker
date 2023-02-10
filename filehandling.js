@@ -12,6 +12,15 @@ class Filehandling {
     return true;
   }
 
+  writeInFile(data) {
+    fs.writeFile(this.fileName, data, (err) => {
+      if (err) {
+        console.error(err);
+      }
+      return true;
+    });
+  }
+
   appendInFile(data) {
     fs.appendFile(this.fileName, data, (err) => {
       if (err) throw err;

@@ -30,10 +30,12 @@ class Passbook {
         previousMoney: this.previousMoney,
         moneyInAccount: this.moneyInAccount,
       };
-      this.f.openFile();
-      this.f.appendInFile(`${JSON.stringify(entry)} \n`);
-
       this.entries.push(entry);
+
+      this.f.openFile();
+      let jsonEntries = JSON.stringify(this.entries, null, 2);
+      this.f.writeInFile(jsonEntries);
+      // this.f.appendInFile(`${JSON.stringify(entry)} \n`);
     }
   }
 
@@ -56,9 +58,12 @@ class Passbook {
         previousMoney: this.previousMoney,
         moneyInAccount: this.moneyInAccount,
       };
-      this.f.openFile();
-      this.f.appendInFile(`${JSON.stringify(expense)} \n`);
       this.entries.push(expense);
+
+      this.f.openFile();
+      let jsonEntries = JSON.stringify(this.entries);
+      this.f.writeInFile(jsonEntries);
+      // this.f.appendInFile(`${JSON.stringify(entry)} \n`);
     }
   }
 

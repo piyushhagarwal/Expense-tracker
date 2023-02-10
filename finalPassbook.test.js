@@ -55,22 +55,22 @@ const Passbook = require("./finalPassbook");
 //   });
 // });
 
-// test("check if the expense is deleted properly by its id", () => {
-//   let esha = new Passbook("eshanew.txt");
-//   esha.addMoney("esha", 1000, "08-01-2023");
-//   esha.addExpense("drinks", 100, "09-01-2023");
-//   esha.addExpense("shopping", 400, "10-01-2023");
-//   esha.addExpense("pepsi", 100, "11-01-2023");
-//   esha.addMoney("dad", 1000, "12-01-2023");
-//   esha.deleteExpense(3);
+test("check if the expense is deleted properly by its id", () => {
+  let esha = new Passbook("eshanew.json");
+  esha.addMoney("esha", 1000, "08-01-2023");
+  esha.addExpense("drinks", 100, "09-01-2023");
+  esha.addExpense("shopping", 400, "10-01-2023");
+  esha.addExpense("pepsi", 100, "11-01-2023");
+  esha.addMoney("dad", 1000, "12-01-2023");
+  esha.deleteExpense(3);
 
-//   expect(esha.checkEntry()).toStrictEqual({
-//     id: 4,
-//     name: "dad",
-//     AddedMoney: 1000,
-//     SpentMoney: 0,
-//     previousMoney: 800,
-//     moneyInAccount: 1800,
-//     date: "12-01-2023",
-//   });
-// });
+  expect(esha.checkEntry()).toStrictEqual({
+    id: 4,
+    name: "dad",
+    AddedMoney: 1000,
+    SpentMoney: 0,
+    previousMoney: 800,
+    moneyInAccount: 1800,
+    date: "12-01-2023",
+  });
+});
